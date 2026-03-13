@@ -27,34 +27,33 @@ height:100vh;
 
 <script>
 
-AFRAME.registerComponent("stable-transform",{
-schema:{factor:{default:0.08}},
+AFRAME.registerComponent("freeze-once",{
 
 init:function(){
 
-this.prevPos=new THREE.Vector3()
-this.prevQuat=new THREE.Quaternion()
+this.frozen=false
 
-this.initialized=false
-},
+this.el.addEventListener("targetFound",()=>{
 
-tick:function(){
+if(this.frozen) return
 
-const obj=this.el.object3D
+const worldPos=new THREE.Vector3()
+const worldQuat=new THREE.Quaternion()
 
-if(!this.initialized){
+this.el.object3D.getWorldPosition(worldPos)
+this.el.object3D.getWorldQuaternion(worldQuat)
 
-this.prevPos.copy(obj.position)
-this.prevQuat.copy(obj.quaternion)
-this.initialized=true
+const model=document.querySelector("#model")
 
-}
+model.object3D.position.copy(worldPos)
+model.object3D.quaternion.copy(worldQuat)
 
-this.prevPos.lerp(obj.position,this.data.factor)
-obj.position.copy(this.prevPos)
+model.object3D.parent.remove(model.object3D)
+document.querySelector("a-scene").object3D.add(model.object3D)
 
-this.prevQuat.slerp(obj.quaternion,this.data.factor)
-obj.quaternion.copy(this.prevQuat)
+this.frozen=true
+
+})
 
 }
 
@@ -69,33 +68,27 @@ obj.quaternion.copy(this.prevQuat)
 <a-scene
 mindar-image="imageTargetSrc: targets.mind; autoStart: true;"
 embedded
-renderer="precision: mediump; antialias: false; colorManagement:true;"
+renderer="precision: mediump; antialias:false"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
 <a-assets>
 
-<a-asset-item
-id="appleModel"
-src="apple.glb">
-</a-asset-item>
+<a-asset-item id="appleModel" src="apple.glb"></a-asset-item>
 
 </a-assets>
 
 <a-light type="ambient" intensity="1"></a-light>
 
-<a-camera
-position="0 0 0"
-look-controls="enabled:false">
-</a-camera>
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<a-entity mindar-image-target="targetIndex:0">
+<a-entity mindar-image-target="targetIndex:0" freeze-once>
 
 <a-gltf-model
+id="model"
 src="#appleModel"
 position="0 -0.05 -0.35"
-scale="0.12 0.12 0.12"
-stable-transform>
+scale="0.12 0.12 0.12">
 </a-gltf-model>
 
 </a-entity>
