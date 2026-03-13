@@ -19,26 +19,36 @@ height:100%;
 
 <script>
 
-AFRAME.registerComponent("smooth-follow", {
+AFRAME.registerComponent("pose-smoothing", {
 
-init: function () {
+init:function(){
 
-this.targetPos = new THREE.Vector3()
-this.targetQuat = new THREE.Quaternion()
+this.prevPos=new THREE.Vector3()
+this.prevQuat=new THREE.Quaternion()
 
-this.object = this.el.object3D
+this.initialized=false
 
 },
 
-tick: function () {
+tick:function(){
 
-const marker = this.el.parentEl.object3D
+const obj=this.el.object3D
 
-marker.getWorldPosition(this.targetPos)
-marker.getWorldQuaternion(this.targetQuat)
+if(!this.initialized){
 
-this.object.position.lerp(this.targetPos, 0.15)
-this.object.quaternion.slerp(this.targetQuat, 0.15)
+this.prevPos.copy(obj.position)
+this.prevQuat.copy(obj.quaternion)
+
+this.initialized=true
+return
+
+}
+
+obj.position.lerp(this.prevPos,0.85)
+obj.quaternion.slerp(this.prevQuat,0.85)
+
+this.prevPos.copy(obj.position)
+this.prevQuat.copy(obj.quaternion)
 
 }
 
@@ -53,7 +63,7 @@ this.object.quaternion.slerp(this.targetQuat, 0.15)
 <a-scene
 mindar-image="imageTargetSrc: targets.mind; autoStart:true; filterMinCF:0.0001; filterBeta:0.01;"
 embedded
-renderer="precision:mediump;antialias:false;logarithmicDepthBuffer:true"
+renderer="precision:mediump;antialias:false"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
@@ -67,12 +77,12 @@ device-orientation-permission-ui="enabled:false">
 
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<a-entity mindar-image-target="targetIndex:0">
+<a-entity mindar-image-target="targetIndex:0" pose-smoothing>
 
 <a-entity
 gltf-model="#appleModel"
 scale="0.12 0.12 0.12"
-smooth-follow>
+position="0 0 0">
 </a-entity>
 
 </a-entity>
