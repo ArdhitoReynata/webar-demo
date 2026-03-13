@@ -4,7 +4,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
 <style>
@@ -27,17 +27,37 @@ height:100vh;
 
 <script>
 
-// smoothing supaya objek tidak jitter
-AFRAME.registerComponent("smooth-follow",{
-schema:{factor:{default:0.15}},
+AFRAME.registerComponent("stable-transform",{
+schema:{factor:{default:0.08}},
+
 init:function(){
+
 this.prevPos=new THREE.Vector3()
+this.prevQuat=new THREE.Quaternion()
+
+this.initialized=false
 },
+
 tick:function(){
+
 const obj=this.el.object3D
+
+if(!this.initialized){
+
+this.prevPos.copy(obj.position)
+this.prevQuat.copy(obj.quaternion)
+this.initialized=true
+
+}
+
 this.prevPos.lerp(obj.position,this.data.factor)
 obj.position.copy(this.prevPos)
+
+this.prevQuat.slerp(obj.quaternion,this.data.factor)
+obj.quaternion.copy(this.prevQuat)
+
 }
+
 })
 
 </script>
@@ -47,19 +67,27 @@ obj.position.copy(this.prevPos)
 <body>
 
 <a-scene
-mindar-image="imageTargetSrc: targets.mind;"
+mindar-image="imageTargetSrc: targets.mind; autoStart: true;"
 embedded
-renderer="colorManagement:true;physicallyCorrectLights:true"
+renderer="precision: mediump; antialias: false; colorManagement:true;"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
 <a-assets>
-<a-asset-item id="appleModel" src="apple.glb"></a-asset-item>
+
+<a-asset-item
+id="appleModel"
+src="apple.glb">
+</a-asset-item>
+
 </a-assets>
 
 <a-light type="ambient" intensity="1"></a-light>
 
-<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+<a-camera
+position="0 0 0"
+look-controls="enabled:false">
+</a-camera>
 
 <a-entity mindar-image-target="targetIndex:0">
 
@@ -67,7 +95,7 @@ device-orientation-permission-ui="enabled:false">
 src="#appleModel"
 position="0 -0.05 -0.35"
 scale="0.12 0.12 0.12"
-smooth-follow>
+stable-transform>
 </a-gltf-model>
 
 </a-entity>
