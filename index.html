@@ -1,79 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
-
-<style>
-html,body{
-margin:0;
-padding:0;
-overflow:hidden;
-}
-</style>
-
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    html, body { margin: 0; padding: 0; overflow: hidden; }
+    /* Tambahkan petunjuk visual agar user tahu harus klik layar */
+    #instruction {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      color: white; background: rgba(0,0,0,0.5); padding: 10px;
+      z-index: 10; font-family: sans-serif; border-radius: 5px;
+      pointer-events: none;
+    }
+  </style>
 </head>
-
 <body>
 
+<div id="instruction">Scan Marker & Tap Layar untuk Mulai</div>
+
 <a-scene
-mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.00001; filterBeta: 0.0001;"
-vr-mode-ui="enabled:false"
-device-orientation-permission-ui="enabled:false">
+  /* Filter diperketat: 0.00001 agar objek kaku/fixed */
+  mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.00001; filterBeta: 0.0001;"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false">
 
-<a-assets>
+  <a-assets>
+    <img id="target" src="target.png">
+    <img id="frame1" src="frame1.png">
+    <img id="frame2" src="frame2.png">
+    <img id="frame3" src="frame3.png">
+  </a-assets>
 
-<img id="target" src="target.png">
-<img id="frame1" src="frame1.png">
-<img id="frame2" src="frame2.png">
-<img id="frame3" src="frame3.png">
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-</a-assets>
-
-<a-camera position="0 0 0"></a-camera>
-
-<a-entity mindar-image-target="targetIndex:0">
-
-<a-plane
-id="anim"
-src="#target"
-width="1.5"
-height="1.5"
-position="0 0 0.05"
-material="transparent:true"
-smooth-follow>
-</a-plane>
-
-</a-entity>
+  <a-entity id="my-target" mindar-image-target="targetIndex: 0">
+    <a-plane
+      id="anim"
+      src="#target"
+      width="1.5"
+      height="1.5"
+      position="0 0 0"
+      material="transparent: true">
+    </a-plane>
+  </a-entity>
 
 </a-scene>
 
 <script>
+  const frames = ["#frame1", "#frame2", "#frame3", "#frame2"];
+  let i = 0;
+  let playing = false;
+  let animInterval;
 
-const frames=["#frame1","#frame2","#frame3","#frame2"];
+  const plane = document.querySelector("#anim");
+  const targetEntity = document.querySelector('#my-target');
 
-let i=0;
-let playing=false;
+  function startAnimation() {
+    if (playing) return;
+    playing = true;
+    console.log("Animasi dimulai lewat klik");
+    
+    animInterval = setInterval(() => {
+      plane.setAttribute("src", frames[i]);
+      i = (i + 1) % frames.length;
+    }, 150);
+  }
 
-const plane=document.querySelector("#anim");
+  function stopAnimation() {
+    playing = false;
+    clearInterval(animInterval);
+    plane.setAttribute("src", "#target"); 
+    i = 0; // Reset index frame
+  }
 
-function startAnimation(){
+  // --- BAGIAN PENTING ---
+  // Hanya jalankan startAnimation jika layar di-klik/tap
+  document.body.addEventListener("click", startAnimation);
 
-if(playing) return;
-playing=true;
+  // Saat target ditemukan, kita TIDAK memanggil startAnimation
+  targetEntity.addEventListener("targetFound", event => {
+    console.log("Marker terkunci. Silakan klik layar untuk memutar frame.");
+  });
 
-setInterval(()=>{
-
-plane.setAttribute("src",frames[i]);
-i=(i+1)%frames.length;
-
-},150);
-
-}
-
-document.body.addEventListener("click",startAnimation);
-
+  // Saat target hilang, kita stop agar tidak berat di memori
+  targetEntity.addEventListener("targetLost", event => {
+    stopAnimation();
+  });
 </script>
 
 </body>
