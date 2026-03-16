@@ -18,7 +18,7 @@ overflow:hidden;
 <body>
 
 <a-scene
-mindar-image="imageTargetSrc: targets.mind;"
+mindar-image="imageTargetSrc: targets.mind; filterMinCF:0.001; filterBeta:0.01;"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
@@ -40,7 +40,7 @@ id="anim"
 src="#target"
 width="1.5"
 height="1.5"
-position="0 0 0.05"
+position="0 0 0.25"
 material="transparent:true">
 </a-plane>
 
