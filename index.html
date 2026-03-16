@@ -11,10 +11,6 @@ margin:0;
 padding:0;
 overflow:hidden;
 }
-a-scene{
-width:100vw;
-height:100vh;
-}
 </style>
 
 </head>
@@ -23,7 +19,6 @@ height:100vh;
 
 <a-scene
 mindar-image="imageTargetSrc: targets.mind;"
-color-space="sRGB"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
@@ -36,20 +31,12 @@ device-orientation-permission-ui="enabled:false">
 
 </a-assets>
 
-<a-camera position="0 0 0" look-controls="enabled:false">
-
-<a-cursor
-fuse="false"
-rayOrigin="mouse">
-</a-cursor>
-
-</a-camera>
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
 <a-entity mindar-image-target="targetIndex:0">
 
 <a-plane
 id="anim"
-class="clickable"
 src="#target"
 width="1"
 height="1"
@@ -85,8 +72,11 @@ i = (i+1)%frames.length;
 
 }
 
-plane.addEventListener("click",startAnimation);
-plane.addEventListener("touchstart",startAnimation);
+/* TAP LAYAR DI HP */
+document.body.addEventListener("touchstart", startAnimation);
+
+/* TAP DI DESKTOP */
+document.body.addEventListener("click", startAnimation);
 
 </script>
 
