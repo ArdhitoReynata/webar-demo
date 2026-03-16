@@ -20,9 +20,10 @@
 
 <a-scene
   /* warmup & miss tolerance ditambah agar tidak terlalu sensitif gerak */
-  mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.0001; filterBeta: 0.01; warmupTolerance: 10; missTolerance: 10;"
+  mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.001; filterBeta: 0.1; warmupTolerance: 3; missTolerance: 3;"
   vr-mode-ui="enabled: false"
-  device-orientation-permission-ui="enabled: false">
+  device-orientation-permission-ui="enabled: false" 
+  renderer="antialias: true; colorManagement: true; precision: medium; powerPreference: high-performance;">
 
   <a-assets>
     <img id="target" src="target.png">
@@ -39,7 +40,7 @@
       src="#target"
       width="1.5"
       height="1.5"
-      position="0 0 0.2"
+      position="0 0 0.1"
       material="transparent: true">
     </a-plane>
   </a-entity>
