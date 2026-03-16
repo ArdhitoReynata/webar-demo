@@ -18,29 +18,31 @@ overflow:hidden;
 <body>
 
 <a-scene
-mindar-image="imageTargetSrc: targets.mind;"
+mindar-image="imageTargetSrc: targets.mind; filterMinCF:0.001; filterBeta:0.01;"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
 <a-assets>
+
 <img id="target" src="target.png">
 <img id="frame1" src="frame1.png">
 <img id="frame2" src="frame2.png">
 <img id="frame3" src="frame3.png">
+
 </a-assets>
 
-<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
+<a-camera position="0 0 0"></a-camera>
 
-<!-- MARKER -->
-<a-entity id="marker" mindar-image-target="targetIndex:0">
+<a-entity mindar-image-target="targetIndex:0">
 
 <a-plane
 id="anim"
 src="#target"
 width="1.5"
 height="1.5"
-position="0 0 0.35"
-material="transparent:true">
+position="0 0 0.05"
+material="transparent:true"
+smooth-follow>
 </a-plane>
 
 </a-entity>
@@ -49,67 +51,28 @@ material="transparent:true">
 
 <script>
 
-window.addEventListener("load",()=>{
-
-const scene=document.querySelector("a-scene");
-const marker=document.querySelector("#marker");
-const plane=document.querySelector("#anim");
-
 const frames=["#frame1","#frame2","#frame3","#frame2"];
 
-let locked=false;
 let i=0;
+let playing=false;
+
+const plane=document.querySelector("#anim");
 
 function startAnimation(){
 
+if(playing) return;
+playing=true;
+
 setInterval(()=>{
+
 plane.setAttribute("src",frames[i]);
 i=(i+1)%frames.length;
+
 },150);
 
 }
 
-marker.addEventListener("targetFound",()=>{
-
-if(locked) return;
-locked=true;
-
-/* ambil posisi world */
-
-const pos=new THREE.Vector3();
-const rot=new THREE.Euler();
-
-plane.object3D.getWorldPosition(pos);
-plane.object3D.getWorldQuaternion(rot);
-
-/* clone object supaya tidak ikut marker */
-
-const clone=document.createElement("a-plane");
-
-clone.setAttribute("src","#target");
-clone.setAttribute("width","1.5");
-clone.setAttribute("height","1.5");
-clone.setAttribute("material","transparent:true");
-
-/* tambahkan ke scene */
-
-scene.appendChild(clone);
-
-/* set posisi tetap */
-
-clone.object3D.position.copy(pos);
-clone.object3D.rotation.copy(rot);
-
-/* jalankan animasi */
-
-setInterval(()=>{
-clone.setAttribute("src",frames[i]);
-i=(i+1)%frames.length;
-},150);
-
-});
-
-});
+document.body.addEventListener("click",startAnimation);
 
 </script>
 
