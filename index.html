@@ -1,93 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+  
   <style>
     html, body { margin: 0; padding: 0; overflow: hidden; }
-    /* Tambahkan petunjuk visual agar user tahu harus klik layar */
+    
+    /* Indikator instruksi untuk user */
     #instruction {
-      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-      color: white; background: rgba(0,0,0,0.5); padding: 10px;
-      z-index: 10; font-family: sans-serif; border-radius: 5px;
+      position: absolute; 
+      top: 20px; 
+      left: 50%; 
+      transform: translateX(-50%);
+      color: white; 
+      background: rgba(0,0,0,0.6); 
+      padding: 12px 20px;
+      z-index: 10; 
+      font-family: sans-serif; 
+      border-radius: 30px;
       pointer-events: none;
+      text-align: center;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,0.3);
     }
   </style>
 </head>
+
 <body>
 
-<div id="instruction">Scan Marker & Tap Layar untuk Mulai</div>
+  <div id="instruction">Scan Marker & Tap Layar untuk Animasi</div>
 
-<a-scene
-  /* warmup & miss tolerance ditambah agar tidak terlalu sensitif gerak */
-  mindar-image="imageTargetSrc: targets.mind; filterMinCF: 0.001; filterBeta: 0.1; warmupTolerance: 3; missTolerance: 3;"
-  vr-mode-ui="enabled: false"
-  device-orientation-permission-ui="enabled: false" 
-  renderer="antialias: true; colorManagement: true; precision: medium; powerPreference: high-performance;">
+  <a-scene
+    mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; uiLoading: no; filterMinCF: 0.0001; filterBeta: 0.001; missTolerance: 30; warmupTolerance: 10;"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false" 
+    renderer="antialias: true; colorManagement: true; precision: medium; powerPreference: high-performance;">
 
-  <a-assets>
-    <img id="target" src="target.png">
-    <img id="frame1" src="frame1.png">
-    <img id="frame2" src="frame2.png">
-    <img id="frame3" src="frame3.png">
-  </a-assets>
+    <a-assets>
+      <img id="target" src="target.png">
+      <img id="frame1" src="frame1.png">
+      <img id="frame2" src="frame2.png">
+      <img id="frame3" src="frame3.png">
+    </a-assets>
 
-  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-  <a-entity id="my-target" mindar-image-target="targetIndex: 0">
-    <a-plane
-      id="anim"
-      src="#target"
-      width="1.5"
-      height="1.5"
-      position="0 0 0.1"
-      material="transparent: true">
-    </a-plane>
-  </a-entity>
+    <a-entity id="my-target" mindar-image-target="targetIndex: 0">
+      <a-plane
+        id="anim"
+        src="#target"
+        width="1.5"
+        height="1.5"
+        position="0 0 0.1"
+        material="transparent: true; shader: flat;">
+      </a-plane>
+    </a-entity>
 
-</a-scene>
+  </a-scene>
 
-<script>
-  const frames = ["#frame1", "#frame2", "#frame3", "#frame2"];
-  let i = 0;
-  let playing = false;
-  let animInterval;
+  <script>
+    const frames = ["#frame1", "#frame2", "#frame3", "#frame2"];
+    let i = 0;
+    let playing = false;
+    let animInterval;
 
-  const plane = document.querySelector("#anim");
-  const targetEntity = document.querySelector('#my-target');
+    const plane = document.querySelector("#anim");
+    const targetEntity = document.querySelector('#my-target');
+    const instruction = document.querySelector('#instruction');
 
-  function startAnimation() {
-    if (playing) return;
-    playing = true;
-    console.log("Animasi dimulai lewat klik");
-    
-    animInterval = setInterval(() => {
-      plane.setAttribute("src", frames[i]);
-      i = (i + 1) % frames.length;
-    }, 150);
-  }
+    // Fungsi untuk menjalankan animasi frame
+    function startAnimation() {
+      if (playing) return;
+      playing = true;
+      instruction.style.display = "none"; // Sembunyikan instruksi saat jalan
+      
+      console.log("Animasi dimulai");
+      animInterval = setInterval(() => {
+        plane.setAttribute("src", frames[i]);
+        i = (i + 1) % frames.length;
+      }, 150);
+    }
 
-  function stopAnimation() {
-    playing = false;
-    clearInterval(animInterval);
-    plane.setAttribute("src", "#target"); 
-    i = 0; // Reset index frame
-  }
+    // Fungsi untuk menghentikan dan reset ke gambar target
+    function stopAnimation() {
+      playing = false;
+      clearInterval(animInterval);
+      plane.setAttribute("src", "#target"); 
+      i = 0;
+      instruction.style.display = "block"; // Munculkan instruksi lagi
+    }
 
-  // --- BAGIAN PENTING ---
-  // Hanya jalankan startAnimation jika layar di-klik/tap
-  document.body.addEventListener("click", startAnimation);
+    // Event Listener Klik Layar
+    document.body.addEventListener("click", startAnimation);
 
-  // Saat target ditemukan, kita TIDAK memanggil startAnimation
-  targetEntity.addEventListener("targetFound", event => {
-    console.log("Marker terkunci. Silakan klik layar untuk memutar frame.");
-  });
+    // Saat Marker Terdeteksi
+    targetEntity.addEventListener("targetFound", event => {
+      console.log("Marker Found: Siap untuk di-klik");
+    });
 
-  // Saat target hilang, kita stop agar tidak berat di memori
-  targetEntity.addEventListener("targetLost", event => {
-    stopAnimation();
-  });
-</script>
+    // Saat Marker Hilang dari Kamera
+    targetEntity.addEventListener("targetLost", event => {
+      console.log("Marker Lost");
+      stopAnimation();
+    });
+  </script>
 
 </body>
 </html>
