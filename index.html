@@ -23,12 +23,10 @@ vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false">
 
 <a-assets>
-
 <img id="target" src="target.png">
 <img id="frame1" src="frame1.png">
 <img id="frame2" src="frame2.png">
 <img id="frame3" src="frame3.png">
-
 </a-assets>
 
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
@@ -50,16 +48,19 @@ material="transparent:true">
 
 <script>
 
-window.addEventListener("load", () => {
+window.addEventListener("load", ()=>{
 
 const marker = document.querySelector("#marker");
 const plane = document.querySelector("#anim");
+const scene = document.querySelector("a-scene");
 
 const frames = ["#frame1","#frame2","#frame3","#frame2"];
 
 let i = 0;
 let playing = false;
+let spawned = false;
 
+/* animasi frame */
 function startAnimation(){
 
 if(playing) return;
@@ -67,18 +68,46 @@ if(playing) return;
 playing = true;
 
 setInterval(()=>{
-
 plane.setAttribute("src",frames[i]);
-
 i = (i+1)%frames.length;
-
 },150);
 
 }
 
-/* tap layar */
 document.body.addEventListener("touchstart", startAnimation);
 document.body.addEventListener("click", startAnimation);
+
+
+/* ketika marker pertama kali terdeteksi */
+marker.addEventListener("targetFound", ()=>{
+
+if(spawned) return;
+
+const worldPos = new THREE.Vector3();
+const worldQuat = new THREE.Quaternion();
+
+plane.object3D.getWorldPosition(worldPos);
+plane.object3D.getWorldQuaternion(worldQuat);
+
+/* lepaskan dari marker */
+marker.removeChild(plane);
+scene.appendChild(plane);
+
+/* set posisi dunia */
+plane.object3D.position.copy(worldPos);
+plane.object3D.quaternion.copy(worldQuat);
+
+spawned = true;
+
+});
+
+
+/* jika marker hilang */
+marker.addEventListener("targetLost", ()=>{
+
+plane.setAttribute("visible", false);
+
+});
 
 });
 
