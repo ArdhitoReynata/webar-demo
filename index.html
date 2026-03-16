@@ -17,6 +17,51 @@
       width: 80%; max-width: 300px;
     }
   </style>
+
+  <script>
+    // DAFTARKAN KOMPONEN KLIK SEBELUM SCENE DIMULAI
+    AFRAME.registerComponent('click-to-animate', {
+      init: function () {
+        const el = this.el;
+        const instruction = document.querySelector('#instruction');
+        const frames = ["#frame1", "#frame2", "#frame3", "#frame2"];
+        let i = 0;
+        let animInterval;
+        let playing = false;
+
+        // Fungsi Start
+        const startAnimation = () => {
+          if (playing) return;
+          playing = true;
+          instruction.style.display = "none";
+          
+          animInterval = setInterval(() => {
+            el.setAttribute("src", frames[i]);
+            i = (i + 1) % frames.length;
+          }, 150);
+        };
+
+        // Fungsi Stop
+        const stopAnimation = () => {
+          playing = false;
+          clearInterval(animInterval);
+          el.setAttribute("src", "#target"); 
+          i = 0;
+          instruction.style.display = "block";
+        };
+
+        // Listener Klik pada Objek
+        el.addEventListener('click', (evt) => {
+          console.log("Objek AR di-tap!");
+          startAnimation();
+        });
+
+        // Hubungkan dengan event targetFound/Lost dari parent
+        const targetEntity = document.querySelector('#my-target');
+        targetEntity.addEventListener("targetLost", stopAnimation);
+      }
+    });
+  </script>
 </head>
 
 <body>
@@ -45,6 +90,7 @@
       <a-plane
         id="anim"
         class="clickable"
+        click-to-animate
         src="#target"
         width="1.5"
         height="1.5"
@@ -54,52 +100,6 @@
     </a-entity>
 
   </a-scene>
-
-  <script>
-    const frames = ["#frame1", "#frame2", "#frame3", "#frame2"];
-    let i = 0;
-    let playing = false;
-    let animInterval;
-
-    const plane = document.querySelector("#anim");
-    const instruction = document.querySelector('#instruction');
-    const targetEntity = document.querySelector('#my-target');
-
-    function startAnimation() {
-      if (playing) return;
-      playing = true;
-      instruction.style.display = "none";
-      
-      animInterval = setInterval(() => {
-        plane.setAttribute("src", frames[i]);
-        i = (i + 1) % frames.length;
-      }, 150);
-    }
-
-    function stopAnimation() {
-      playing = false;
-      clearInterval(animInterval);
-      plane.setAttribute("src", "#target"); 
-      i = 0;
-      instruction.style.display = "block";
-    }
-
-    // Listener ini akan bekerja baik di iOS maupun Android
-    plane.addEventListener("click", (e) => {
-      // Mencegah trigger ganda pada beberapa browser mobile
-      e.preventDefault(); 
-      startAnimation();
-    });
-
-    targetEntity.addEventListener("targetLost", () => {
-      stopAnimation();
-    });
-
-    // Tambahan untuk debugging di mobile jika diperlukan
-    targetEntity.addEventListener("targetFound", () => {
-      console.log("Marker ditemukan di perangkat mobile");
-    });
-  </script>
 
 </body>
 </html>
