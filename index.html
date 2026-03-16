@@ -48,7 +48,7 @@ material="transparent:true">
 
 <script>
 
-window.addEventListener("load", ()=>{
+window.addEventListener("load",()=>{
 
 const marker = document.querySelector("#marker");
 const plane = document.querySelector("#anim");
@@ -56,56 +56,65 @@ const scene = document.querySelector("a-scene");
 
 const frames = ["#frame1","#frame2","#frame3","#frame2"];
 
-let i = 0;
-let playing = false;
-let spawned = false;
+let i=0;
+let playing=false;
+let spawned=false;
+let worldPlane=null;
 
-/* animasi frame */
+/* animasi */
 function startAnimation(){
 
 if(playing) return;
 
-playing = true;
+playing=true;
 
 setInterval(()=>{
-plane.setAttribute("src",frames[i]);
-i = (i+1)%frames.length;
+if(worldPlane){
+worldPlane.setAttribute("src",frames[i]);
+}
+i=(i+1)%frames.length;
+
 },150);
 
 }
 
-document.body.addEventListener("touchstart", startAnimation);
-document.body.addEventListener("click", startAnimation);
+document.body.addEventListener("touchstart",startAnimation);
+document.body.addEventListener("click",startAnimation);
 
 
-/* ketika marker pertama kali terdeteksi */
-marker.addEventListener("targetFound", ()=>{
+/* marker ditemukan */
+marker.addEventListener("targetFound",()=>{
 
 if(spawned) return;
 
-const worldPos = new THREE.Vector3();
-const worldQuat = new THREE.Quaternion();
+const pos=new THREE.Vector3();
+const rot=new THREE.Quaternion();
 
-plane.object3D.getWorldPosition(worldPos);
-plane.object3D.getWorldQuaternion(worldQuat);
+plane.object3D.getWorldPosition(pos);
+plane.object3D.getWorldQuaternion(rot);
 
-/* lepaskan dari marker */
-marker.removeChild(plane);
-scene.appendChild(plane);
+/* clone objek */
+worldPlane=plane.cloneNode(true);
+
+scene.appendChild(worldPlane);
 
 /* set posisi dunia */
-plane.object3D.position.copy(worldPos);
-plane.object3D.quaternion.copy(worldQuat);
+worldPlane.object3D.position.copy(pos);
+worldPlane.object3D.quaternion.copy(rot);
 
-spawned = true;
+/* sembunyikan objek marker */
+plane.setAttribute("visible",false);
+
+spawned=true;
 
 });
 
+/* marker hilang */
+marker.addEventListener("targetLost",()=>{
 
-/* jika marker hilang */
-marker.addEventListener("targetLost", ()=>{
-
-plane.setAttribute("visible", false);
+if(worldPlane){
+worldPlane.setAttribute("visible",false);
+}
 
 });
 
