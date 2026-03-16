@@ -31,7 +31,7 @@ device-orientation-permission-ui="enabled:false">
 
 </a-assets>
 
-<a-camera id="camera" position="0 0 0" look-controls="enabled:false"></a-camera>
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
 <a-entity id="marker" mindar-image-target="targetIndex:0">
 
@@ -50,15 +50,15 @@ material="transparent:true">
 
 <script>
 
+window.addEventListener("load", () => {
+
 const marker = document.querySelector("#marker");
 const plane = document.querySelector("#anim");
-const scene = document.querySelector("a-scene");
 
 const frames = ["#frame1","#frame2","#frame3","#frame2"];
 
 let i = 0;
 let playing = false;
-let fixed = false;
 
 function startAnimation(){
 
@@ -69,36 +69,16 @@ playing = true;
 setInterval(()=>{
 
 plane.setAttribute("src",frames[i]);
+
 i = (i+1)%frames.length;
 
 },150);
 
 }
 
-/* TAP UNTUK MULAI ANIMASI */
+/* tap layar */
 document.body.addEventListener("touchstart", startAnimation);
 document.body.addEventListener("click", startAnimation);
-
-/* SPAWN OBJECT DAN FIX DI TEMPAT */
-marker.addEventListener("targetFound", () => {
-
-if(fixed) return;
-
-const pos = new THREE.Vector3();
-const rot = new THREE.Quaternion();
-
-plane.object3D.getWorldPosition(pos);
-plane.object3D.getWorldQuaternion(rot);
-
-/* pindahkan keluar dari marker */
-marker.removeChild(plane);
-scene.appendChild(plane);
-
-/* set posisi world */
-plane.object3D.position.copy(pos);
-plane.object3D.quaternion.copy(rot);
-
-fixed = true;
 
 });
 
