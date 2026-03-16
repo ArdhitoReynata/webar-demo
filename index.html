@@ -25,7 +25,6 @@ device-orientation-permission-ui="enabled:false">
 <a-assets>
 
 <img id="target" src="target.png">
-
 <img id="frame1" src="frame1.png">
 <img id="frame2" src="frame2.png">
 <img id="frame3" src="frame3.png">
@@ -34,12 +33,11 @@ device-orientation-permission-ui="enabled:false">
 
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<!-- MARKER -->
 <a-entity id="marker" mindar-image-target="targetIndex:0">
 
 <a-plane
 id="anim"
-src="#frame1"
+src="#target"
 width="1.5"
 height="1.5"
 position="0 0 0.35"
@@ -54,15 +52,12 @@ material="transparent:true">
 
 window.addEventListener("load",()=>{
 
-const scene=document.querySelector("a-scene");
-const marker=document.querySelector("#marker");
 const plane=document.querySelector("#anim");
 
 const frames=["#frame1","#frame2","#frame3","#frame2"];
 
 let i=0;
 let playing=false;
-let locked=false;
 
 function startAnimation(){
 
@@ -79,32 +74,8 @@ i=(i+1)%frames.length;
 
 }
 
-marker.addEventListener("targetFound",()=>{
-
-if(locked) return;
-
-locked=true;
-
-startAnimation();
-
-/* ambil posisi world object */
-
-const pos=new THREE.Vector3();
-const rot=new THREE.Euler();
-
-plane.object3D.getWorldPosition(pos);
-rot.copy(plane.object3D.rotation);
-
-/* pindahkan object ke scene */
-
-scene.appendChild(plane);
-
-/* set posisi tetap */
-
-plane.object3D.position.copy(pos);
-plane.object3D.rotation.copy(rot);
-
-});
+document.body.addEventListener("click",startAnimation);
+document.body.addEventListener("touchstart",startAnimation);
 
 });
 
