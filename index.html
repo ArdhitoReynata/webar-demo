@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
   
   <style>
@@ -16,7 +17,6 @@
   </style>
 
   <script>
-    // Daftarkan komponen sebelum scene render
     AFRAME.registerComponent('mytap', {
       init: function () {
         const el = this.el;
@@ -28,7 +28,9 @@
         const start = () => {
           if (playing) return;
           playing = true;
-          document.querySelector('#instruction').style.display = "none";
+          const ins = document.querySelector('#instruction');
+          if(ins) ins.style.display = "none";
+          
           animInterval = setInterval(() => {
             el.setAttribute("src", frames[i]);
             i = (i + 1) % frames.length;
@@ -40,17 +42,21 @@
           if(animInterval) clearInterval(animInterval);
           el.setAttribute("src", "#target"); 
           i = 0;
-          document.querySelector('#instruction').style.display = "block";
+          const ins = document.querySelector('#instruction');
+          if(ins) ins.style.display = "block";
         };
 
-        // Event listener klik resmi A-Frame
+        // Event listener klik resmi
         el.addEventListener('click', () => {
           console.log("Plane ditekan!");
           start();
         });
 
         // Berhenti jika marker hilang
-        this.el.closest('a-entity[mindar-image-target]').addEventListener("targetLost", stop);
+        const targetEntity = this.el.closest('a-entity[mindar-image-target]');
+        if (targetEntity) {
+          targetEntity.addEventListener("targetLost", stop);
+        }
       }
     });
   </script>
@@ -64,8 +70,7 @@
     mindar-image="imageTargetSrc: targets.mind; maxTrack: 1; uiLoading: no; filterMinCF: 0.0001; filterBeta: 0.001; missTolerance: 30; warmupTolerance: 10;"
     vr-mode-ui="enabled: false"
     device-orientation-permission-ui="enabled: true" 
-    renderer="antialias: true; colorManagement: true;"
-    raycaster="objects: .clickable"> 
+    renderer="antialias: true; colorManagement: true;"> 
 
     <a-assets>
       <img id="target" src="target.png">
@@ -75,7 +80,10 @@
     </a-assets>
 
     <a-camera position="0 0 0" look-controls="enabled: false">
-      <a-entity cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .clickable"></a-entity>
+      <a-entity 
+        cursor="fuse: false; rayOrigin: mouse;" 
+        raycaster="objects: .clickable">
+      </a-entity>
     </a-camera>
 
     <a-entity id="my-target" mindar-image-target="targetIndex: 0">
