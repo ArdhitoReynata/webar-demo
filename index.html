@@ -1002,18 +1002,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 1 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart1.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part1Finished = true;
                 
-                // HIDE container Part 1 setelah selesai
-                fadeOutContainer(containerPart1, 400);
+                // HIDE container Part 1 setelah selesai (fade out will handle visibility)
+                fadeOutContainer(containerPart1, 400, () => {
+                    // Reset videos AFTER fade out to prevent black screen during animation
+                    videosPart1.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
@@ -1156,18 +1155,17 @@
                     v.onended = resolve;
                 }))).then(() => {
                     console.log('✅ Part 2 finished!');
-                    
-                    // Reset videos IMMEDIATELY to prevent black screen
-                    videosPart2.forEach(v => {
-                        v.pause();
-                        v.currentTime = 0;
-                    });
-                    
                     isPlaying = false;
                     part2Finished = true;
                     
                     // HIDE container Part 2 setelah selesai
-                    fadeOutContainer(containerPart2, 400);
+                    fadeOutContainer(containerPart2, 400, () => {
+                        // Reset videos AFTER fade out
+                        videosPart2.forEach(v => {
+                            v.pause();
+                            v.currentTime = 0;
+                        });
+                    });
                     
                     // UNLOCK MARKER
                     isMarkerLocked = false;
@@ -1287,18 +1285,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 3 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart3.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part3Finished = true;
                 
                 // HIDE container Part 3 setelah selesai (prevent overlap dengan Part 4)
-                fadeOutContainer(containerPart3, 400);
+                fadeOutContainer(containerPart3, 400, () => {
+                    // Reset videos AFTER fade out
+                    videosPart3.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
@@ -2123,18 +2120,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 4 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart4.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part4Finished = true;
                 
                 // HIDE container Part 4 setelah selesai
-                fadeOutContainer(containerPart4, 400);
+                fadeOutContainer(containerPart4, 400, () => {
+                    // Reset videos AFTER fade out
+                    videosPart4.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
@@ -2207,18 +2203,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 5 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart5.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part5Finished = true;
                 
                 // HIDE container Part 5 setelah selesai
-                fadeOutContainer(containerPart5, 400);
+                fadeOutContainer(containerPart5, 400, () => {
+                    // Reset videos AFTER fade out
+                    videosPart5.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
@@ -2291,18 +2286,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 6 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart6.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part6Finished = true;
                 
                 // HIDE container Part 6 setelah selesai
-                fadeOutContainer(containerPart6, 400);
+                fadeOutContainer(containerPart6, 400, () => {
+                    // Reset videos AFTER fade out
+                    videosPart6.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
@@ -2375,18 +2369,17 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 7 finished!');
-                
-                // Reset videos IMMEDIATELY to prevent black screen
-                videosPart7.forEach(v => {
-                    v.pause();
-                    v.currentTime = 0;
-                });
-                
                 isPlaying = false;
                 part7Finished = true;
                 
                 // HIDE container Part 7 setelah selesai
-                fadeOutContainer(containerPart7, 400);
+                fadeOutContainer(containerPart7, 400, () => {
+                    // Reset videos AFTER fade out
+                    videosPart7.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                });
                 
                 // UNLOCK MARKER
                 isMarkerLocked = false;
