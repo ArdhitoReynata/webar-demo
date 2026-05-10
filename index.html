@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -183,11 +183,22 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.5s;
+            /* Reduce GPU usage on mobile */
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            will-change: auto;
         }
         
         #arScene.ready {
             opacity: 1;
             pointer-events: auto;
+        }
+        
+        /* Optimize video rendering on mobile */
+        video {
+            image-rendering: auto;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
     </style>
 </head>
@@ -218,16 +229,19 @@
         id="arScene"
         mindar-image="
             imageTargetSrc: ./targets.mind;
-            filterMinCF: 0.0001;
-            filterBeta: 0.001;
-            warmupTolerance: 3;
-            missTolerance: 5;
-            maxTrack: 7;
+            filterMinCF: 0.001;
+            filterBeta: 0.01;
+            warmupTolerance: 5;
+            missTolerance: 10;
+            maxTrack: 1;
+            uiScanning: #scanning;
+            uiLoading: #loading;
         "
         color-space="sRGB" 
-        renderer="colorManagement: true, physicallyCorrectLights: true, antialias: true"
+        renderer="colorManagement: true, physicallyCorrectLights: false, antialias: false, precision: mediump, powerPreference: low-power"
         vr-mode-ui="enabled: false" 
         device-orientation-permission-ui="enabled: false"
+        embedded
     >
         <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -2119,18 +2133,18 @@
             }
         });
         
-        // Enable audio on first interaction (with volume 0 to prevent sound)
+        // Enable audio on first interaction (MUTED to prevent sound on mobile)
         document.body.addEventListener('click', async () => {
             if (soundV1.paused && currentPart === 0) {
                 try {
-                    // Set volume to 0 first to prevent sound
-                    soundV1.volume = 0;
-                    soundV2.volume = 0;
-                    soundV3.volume = 0;
-                    soundV4.volume = 0;
-                    soundV5.volume = 0;
-                    soundV6.volume = 0;
-                    soundV7.volume = 0;
+                    // Set MUTED first (more reliable on mobile than volume = 0)
+                    soundV1.muted = true;
+                    soundV2.muted = true;
+                    soundV3.muted = true;
+                    soundV4.muted = true;
+                    soundV5.muted = true;
+                    soundV6.muted = true;
+                    soundV7.muted = true;
                     
                     await soundV1.play();
                     soundV1.pause();
@@ -2154,16 +2168,16 @@
                     soundV7.pause();
                     soundV7.currentTime = 0;
                     
-                    // Reset volume to 1 for actual playback
-                    soundV1.volume = 1;
-                    soundV2.volume = 1;
-                    soundV3.volume = 1;
-                    soundV4.volume = 1;
-                    soundV5.volume = 1;
-                    soundV6.volume = 1;
-                    soundV7.volume = 1;
+                    // Unmute for actual playback
+                    soundV1.muted = false;
+                    soundV2.muted = false;
+                    soundV3.muted = false;
+                    soundV4.muted = false;
+                    soundV5.muted = false;
+                    soundV6.muted = false;
+                    soundV7.muted = false;
                     
-                    console.log('✅ Audio enabled (silent)');
+                    console.log('✅ Audio enabled (muted during init)');
                 } catch (e) {
                     console.log('Audio blocked:', e);
                 }
