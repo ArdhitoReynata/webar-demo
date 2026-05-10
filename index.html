@@ -742,6 +742,7 @@
         let videosBuffered = 0;
         let allReady = false;
         let allFullyBuffered = false;
+        let audioEnabled = false; // Track if audio context is unlocked
         let currentPart = 0; // 0 = not started, 1 = part 1, 2 = part 2, 3 = part 3
         let isPlaying = false;
         let isTransitioning = false;
@@ -923,7 +924,7 @@
             });
         });
 
-        // Start button - CHECK IF FULLY BUFFERED and ENABLE AUDIO (DON'T PLAY YET!)
+        // Start button - CHECK IF FULLY BUFFERED and ENABLE AUDIO
         startButton.addEventListener('click', async () => {
             if (!allFullyBuffered) {
                 alert('⚠️ Video masih loading, tunggu sampai semua video fully buffered!');
@@ -932,19 +933,55 @@
             
             console.log('👆 Starting AR...');
             
-            // Enable audio with user interaction (required by browsers) - BUT DON'T PLAY
+            // Enable audio with user interaction (required by browsers)
+            // Use muted play-pause to unlock audio context
             try {
-                soundV1.load();
-                soundV2.load();
-                soundV3.load();
-                soundV4.load();
-                soundV5.load();
-                soundV6.load();
-                soundV7.load();
-                // Just enable, don't play yet
-                console.log('✅ Audio enabled (will play when marker detected)');
+                // Set MUTED first
+                soundV1.muted = true;
+                soundV2.muted = true;
+                soundV3.muted = true;
+                soundV4.muted = true;
+                soundV5.muted = true;
+                soundV6.muted = true;
+                soundV7.muted = true;
+                
+                // Play-pause to unlock audio context (muted so no sound)
+                await soundV1.play();
+                soundV1.pause();
+                soundV1.currentTime = 0;
+                await soundV2.play();
+                soundV2.pause();
+                soundV2.currentTime = 0;
+                await soundV3.play();
+                soundV3.pause();
+                soundV3.currentTime = 0;
+                await soundV4.play();
+                soundV4.pause();
+                soundV4.currentTime = 0;
+                await soundV5.play();
+                soundV5.pause();
+                soundV5.currentTime = 0;
+                await soundV6.play();
+                soundV6.pause();
+                soundV6.currentTime = 0;
+                await soundV7.play();
+                soundV7.pause();
+                soundV7.currentTime = 0;
+                
+                // Unmute for actual playback
+                soundV1.muted = false;
+                soundV2.muted = false;
+                soundV3.muted = false;
+                soundV4.muted = false;
+                soundV5.muted = false;
+                soundV6.muted = false;
+                soundV7.muted = false;
+                
+                audioEnabled = true; // Mark audio as enabled
+                console.log('✅ Audio enabled and ready');
             } catch (e) {
                 console.warn('⚠️ Audio enable failed:', e);
+                audioEnabled = false;
             }
             
             loadingOverlay.classList.add('hidden');
@@ -1046,12 +1083,16 @@
             
             // Step 5: Start audio
             try {
-                soundV1.pause();
-                soundV1.currentTime = 0;
-                soundV1.volume = 0;
-                await soundV1.play();
-                fadeAudioIn(soundV1, 400); // Dikurangi dari 500ms ke 400ms
-                console.log('✅ Audio v1 playing (synced)!');
+                if (!audioEnabled) {
+                    console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+                } else {
+                    soundV1.pause();
+                    soundV1.currentTime = 0;
+                    soundV1.volume = 0;
+                    await soundV1.play();
+                    fadeAudioIn(soundV1, 400); // Dikurangi dari 500ms ke 400ms
+                    console.log('✅ Audio v1 playing (synced)!');
+                }
             } catch (e) {
                 console.error('❌ Audio v1 error:', e);
             }
@@ -1169,12 +1210,16 @@
                 
                 // Step 5: Start audio v2
                 try {
+                    if (!audioEnabled) {
+                    console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+                } else {
                     soundV2.pause();
                     soundV2.currentTime = 0;
                     soundV2.volume = 0;
                     await soundV2.play();
                     fadeAudioIn(soundV2, 400);
                     console.log('✅ Audio v2 playing (synced)!');
+                }
                 } catch (e) {
                     console.error('❌ Audio v2 error:', e);
                 }
@@ -1268,12 +1313,16 @@
             
             // Step 5: Start audio v3
             try {
+                if (!audioEnabled) {
+                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+            } else {
                 soundV3.pause();
                 soundV3.currentTime = 0;
                 soundV3.volume = 0;
                 await soundV3.play();
                 fadeAudioIn(soundV3, 400);
                 console.log('✅ Audio v3 playing (synced)!');
+            }
             } catch (e) {
                 console.error('❌ Audio v3 error:', e);
             }
@@ -2119,56 +2168,8 @@
             }
         });
         
-        // Enable audio on first interaction (MUTED to prevent sound on mobile)
-        document.body.addEventListener('click', async () => {
-            if (soundV1.paused && currentPart === 0) {
-                try {
-                    // Set MUTED first (more reliable on mobile than volume = 0)
-                    soundV1.muted = true;
-                    soundV2.muted = true;
-                    soundV3.muted = true;
-                    soundV4.muted = true;
-                    soundV5.muted = true;
-                    soundV6.muted = true;
-                    soundV7.muted = true;
-                    
-                    await soundV1.play();
-                    soundV1.pause();
-                    soundV1.currentTime = 0;
-                    await soundV2.play();
-                    soundV2.pause();
-                    soundV2.currentTime = 0;
-                    await soundV3.play();
-                    soundV3.pause();
-                    soundV3.currentTime = 0;
-                    await soundV4.play();
-                    soundV4.pause();
-                    soundV4.currentTime = 0;
-                    await soundV5.play();
-                    soundV5.pause();
-                    soundV5.currentTime = 0;
-                    await soundV6.play();
-                    soundV6.pause();
-                    soundV6.currentTime = 0;
-                    await soundV7.play();
-                    soundV7.pause();
-                    soundV7.currentTime = 0;
-                    
-                    // Unmute for actual playback
-                    soundV1.muted = false;
-                    soundV2.muted = false;
-                    soundV3.muted = false;
-                    soundV4.muted = false;
-                    soundV5.muted = false;
-                    soundV6.muted = false;
-                    soundV7.muted = false;
-                    
-                    console.log('✅ Audio enabled (muted during init)');
-                } catch (e) {
-                    console.log('Audio blocked:', e);
-                }
-            }
-        }, { once: true });
+        // Audio is now enabled in start button click handler only
+        // No need for separate body click listener to prevent race conditions
 
         // Play Part 4 - 3 videos + 1 image overlay bersamaan dengan audio v4
         async function playPart4() {
@@ -2233,12 +2234,16 @@
             await new Promise(r => setTimeout(r, 50));
             
             try {
+                if (!audioEnabled) {
+                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+            } else {
                 soundV4.pause();
                 soundV4.currentTime = 0;
                 soundV4.volume = 0;
                 await soundV4.play();
                 fadeAudioIn(soundV4, 400);
                 console.log('✅ Audio v4 playing (synced)!');
+            }
             } catch (e) {
                 console.error('❌ Audio v4 error:', e);
             }
@@ -2325,12 +2330,16 @@
             await new Promise(r => setTimeout(r, 50));
             
             try {
+                if (!audioEnabled) {
+                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+            } else {
                 soundV5.pause();
                 soundV5.currentTime = 0;
                 soundV5.volume = 0;
                 await soundV5.play();
                 fadeAudioIn(soundV5, 400);
                 console.log('✅ Audio v5 playing (synced)!');
+            }
             } catch (e) {
                 console.error('❌ Audio v5 error:', e);
             }
@@ -2417,12 +2426,16 @@
             await new Promise(r => setTimeout(r, 50));
             
             try {
+                if (!audioEnabled) {
+                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+            } else {
                 soundV6.pause();
                 soundV6.currentTime = 0;
                 soundV6.volume = 0;
                 await soundV6.play();
                 fadeAudioIn(soundV6, 400);
                 console.log('✅ Audio v6 playing (synced)!');
+            }
             } catch (e) {
                 console.error('❌ Audio v6 error:', e);
             }
@@ -2509,12 +2522,16 @@
             await new Promise(r => setTimeout(r, 50));
             
             try {
+                if (!audioEnabled) {
+                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
+            } else {
                 soundV7.pause();
                 soundV7.currentTime = 0;
                 soundV7.volume = 0;
                 await soundV7.play();
                 fadeAudioIn(soundV7, 400);
                 console.log('✅ Audio v7 playing (synced)!');
+            }
             } catch (e) {
                 console.error('❌ Audio v7 error:', e);
             }
