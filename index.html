@@ -989,13 +989,13 @@
             const playPromises = videosPart1.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Step 2: Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Step 2: Wait for videos to be ready (no buffering, no black screen)
+            await new Promise(r => setTimeout(r, 200)); // Increased wait time for buffering
             
-            // Step 3: Fade in container (audio embedded in video will play automatically)
+            // Step 3: Fade in container (audio embedded in BATU SEAWEED video will play automatically)
             fadeInContainer(containerPart1, 400);
             
-            console.log('✅ Part 1 playing - 5 videos overlay (audio embedded in BATU SEAWEED video)');
+            console.log('✅ Part 1 playing - 5 videos overlay (audio embedded in BATU SEAWEED)');
             
             // Wait for all videos to end
             Promise.all(videosPart1.map(v => new Promise(resolve => {
@@ -1140,13 +1140,13 @@
                 const playPromises = videosPart2.map(v => v.play().catch(e => console.error('Video play error:', e)));
                 await Promise.all(playPromises);
                 
-                // Step 2: Wait minimal untuk first frame
-                await new Promise(r => setTimeout(r, 150));
+                // Step 2: Wait for videos to be ready
+                await new Promise(r => setTimeout(r, 200));
                 
-                // Step 3: Fade in container (audio embedded in BATU SEAWEED video)
+                // Step 3: Fade in container (audio embedded in BATU SEAWEED)
                 fadeInContainer(containerPart2, 400);
                 
-                console.log('✅ Part 2 playing - 5 videos overlay (audio embedded in BATU SEAWEED video)');
+                console.log('✅ Part 2 playing - 5 videos overlay (audio embedded in BATU SEAWEED)');
                 
                 isTransitioning = false;
                 
@@ -1224,13 +1224,13 @@
             const playPromises = videosPart3.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Step 2: Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Step 2: Wait for videos to be ready
+            await new Promise(r => setTimeout(r, 200));
             
-            // Step 3: Fade in container (audio embedded in KAPAL SELAM video)
+            // Step 3: Fade in container (audio embedded in KAPAL SELAM)
             fadeInContainer(containerPart3, 400);
             
-            console.log('✅ Part 3 playing - 3 videos overlay (audio embedded in KAPAL SELAM video)');
+            console.log('✅ Part 3 playing - 3 videos overlay (audio embedded in KAPAL SELAM)');
             
             isTransitioning = false;
             
@@ -2105,13 +2105,13 @@
             const playPromises = videosPart4.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Wait for videos to be ready
+            await new Promise(r => setTimeout(r, 200));
             
-            // Fade in container (audio embedded in KAPAL SELAM video)
+            // Fade in container (audio embedded in KAPAL SELAM)
             fadeInContainer(containerPart4, 400);
             
-            console.log('✅ Part 4 playing - 3 videos + 1 image overlay (audio embedded in KAPAL SELAM video)');
+            console.log('✅ Part 4 playing - 3 videos + 1 image (audio embedded in KAPAL SELAM)');
             
             isTransitioning = false;
             
@@ -2188,13 +2188,13 @@
             const playPromises = videosPart5.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Wait for videos to be ready
+            await new Promise(r => setTimeout(r, 200));
             
-            // Fade in container (audio embedded in KAPAL SELAM video)
+            // Fade in container (audio embedded in KAPAL SELAM)
             fadeInContainer(containerPart5, 400);
             
-            console.log('✅ Part 5 playing - 3 videos overlay (audio embedded in KAPAL SELAM video)');
+            console.log('✅ Part 5 playing - 3 videos (audio embedded in KAPAL SELAM)');
             
             isTransitioning = false;
             
@@ -2271,13 +2271,13 @@
             const playPromises = videosPart6.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Wait for videos to be ready
+            await new Promise(r => setTimeout(r, 200));
             
-            // Fade in container (audio embedded in GOSOK GIGI video)
+            // Fade in container (audio embedded in GOSOK GIGI)
             fadeInContainer(containerPart6, 400);
             
-            console.log('✅ Part 6 playing - 4 videos overlay (audio embedded in GOSOK GIGI video)');
+            console.log('✅ Part 6 playing - 4 videos (audio embedded in GOSOK GIGI)');
             
             isTransitioning = false;
             
@@ -2354,13 +2354,13 @@
             const playPromises = videosPart7.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Wait minimal untuk first frame
-            await new Promise(r => setTimeout(r, 150));
+            // Wait for videos to be ready
+            await new Promise(r => setTimeout(r, 200));
             
-            // Fade in container (audio embedded in CORAL video)
+            // Fade in container (audio embedded in CORAL)
             fadeInContainer(containerPart7, 400);
             
-            console.log('✅ Part 7 playing - 4 videos overlay (audio embedded in CORAL video)');
+            console.log('✅ Part 7 playing - 4 videos (audio embedded in CORAL)');
             
             isTransitioning = false;
             
@@ -2412,7 +2412,7 @@
         console.log('📋 SEQUENTIAL MODE: Harus urut Part 1 → 2 → 3 → 4 → 5 → 6 → 7');
         console.log('🔄 Bisa ulang part yang sama jika kurang jelas (tap untuk replay)');
         console.log('⛔ Tidak bisa balik ke part sebelumnya');
-        console.log('🎵 Audio embedded in video - no separate audio files needed!');
+        console.log('🎵 Audio embedded in video - buffering handled at start to prevent black screen!');
     </script>
 </body>
 </html>
