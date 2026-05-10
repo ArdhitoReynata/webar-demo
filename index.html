@@ -311,30 +311,30 @@
         <a-assets>
             <!-- Part 1 Videos - All 60fps, 15.1s, 1280x1280 -->
             <video id="vid-laut" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
-            <video id="vid-batu" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-batu" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- BATU SEAWEED-AV has embedded audio -->
             <video id="vid-gelembung" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-kapal" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-mascot" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 2 Videos - All 60fps, 15.1s, 1280x1280 -->
-            <video id="vid-batu2" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-batu2" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- BATU SEAWEED-AV has embedded audio -->
             <video id="vid-gelembung2" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-mascot2" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-gosok" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-orang" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 3 Videos - All 60fps, 25.54s, 1280x1280 -->
-            <video id="vid-kapal3" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-kapal3" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- KAPAL SELAM-AV has embedded audio -->
             <video id="vid-mascot3" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-sikat" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 4 Videos - All 60fps, 12.07s, 1280x1280 -->
-            <video id="vid-kapal4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-kapal4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- KAPAL SELAM-AV has embedded audio -->
             <video id="vid-mascot4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-sikat4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 5 Videos - All 60fps, 23.08s, 1280x1280 -->
-            <video id="vid-kapal5" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-kapal5" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- KAPAL SELAM-AV has embedded audio -->
             <video id="vid-orang5" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-tangan" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
@@ -342,10 +342,10 @@
             <video id="vid-kapal6" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-mascot6" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-orang6" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
-            <video id="vid-gosok6" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-gosok6" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- GOSOK GIGI-AV has embedded audio -->
             
             <!-- Part 7 Videos - All 60fps, 28.26s, 1280x1280 -->
-            <video id="vid-coral7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
+            <video id="vid-coral7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline></video><!-- CORAL-AV has embedded audio -->
             <video id="vid-laut7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-mascot7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-orang7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
@@ -370,40 +370,41 @@
         
         // Set video sources with cache buster
         document.getElementById('vid-laut').src = `./compressed/LAUT-v1.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-batu').src = `./compressed/BATU SEAWEED-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-batu').src = `./compressed/BATU SEAWEED-AV-v1.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-gelembung').src = `./compressed/GELEMBUNG-v1.mp4?t=${cacheBuster}`;
         document.getElementById('vid-kapal').src = `./compressed/KAPAL SELAM-v1.mp4?t=${cacheBuster}`;
         document.getElementById('vid-mascot').src = `./compressed/MASCOT-v1.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-batu2').src = `./compressed/BATU SEAWEED-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-batu2').src = `./compressed/BATU SEAWEED-AV-v2.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-gelembung2').src = `./compressed/GELEMBUNG-v2.mp4?t=${cacheBuster}`;
         document.getElementById('vid-mascot2').src = `./compressed/MASCOT-v2.mp4?t=${cacheBuster}`;
         document.getElementById('vid-gosok').src = `./compressed/GOSOK GIGI-v2.mp4?t=${cacheBuster}`;
         document.getElementById('vid-orang').src = `./compressed/ORANG-v2.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal3').src = `./compressed/KAPAL SELAM-v3.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal3').src = `./compressed/KAPAL SELAM-AV-v3.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-mascot3').src = `./compressed/MASCOT-v3.mp4?t=${cacheBuster}`;
         document.getElementById('vid-sikat').src = `./compressed/SIKAT GIGI-v3.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal4').src = `./compressed/KAPAL SELAM-v4.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal4').src = `./compressed/KAPAL SELAM-AV-v4.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-mascot4').src = `./compressed/MASCOT-v4.mp4?t=${cacheBuster}`;
         document.getElementById('vid-sikat4').src = `./compressed/SIKAT GIGI-v4.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal5').src = `./compressed/KAPAL SELAM-v5.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal5').src = `./compressed/KAPAL SELAM-AV-v5.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-orang5').src = `./compressed/ORANG-v5.mp4?t=${cacheBuster}`;
         document.getElementById('vid-tangan').src = `./compressed/TANGAN-v5.mp4?t=${cacheBuster}`;
         
         document.getElementById('vid-kapal6').src = `./compressed/KAPAL SELAM-v6.mp4?t=${cacheBuster}`;
         document.getElementById('vid-mascot6').src = `./compressed/MASCOT-v6.mp4?t=${cacheBuster}`;
         document.getElementById('vid-orang6').src = `./compressed/ORANG-v6.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-gosok6').src = `./compressed/GOSOK GIGI-v6.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-gosok6').src = `./compressed/GOSOK GIGI-AV-v6.mp4?t=${cacheBuster}`; // Has embedded audio
         
-        document.getElementById('vid-coral7').src = `./compressed/CORAL-v7.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-coral7').src = `./compressed/CORAL-AV-v7.mp4?t=${cacheBuster}`; // Has embedded audio
         document.getElementById('vid-laut7').src = `./compressed/LAUT-v7.mp4?t=${cacheBuster}`;
         document.getElementById('vid-mascot7').src = `./compressed/MASCOT-v7.mp4?t=${cacheBuster}`;
         document.getElementById('vid-orang7').src = `./compressed/ORANG-v7.mp4?t=${cacheBuster}`;
         
         console.log('🔄 Cache buster applied:', cacheBuster);
+        console.log('🎵 Videos with embedded audio: BATU-v1, BATU-v2, KAPAL-v3, KAPAL-v4, KAPAL-v5, GOSOK-v6, CORAL-v7');
         
         // Chromakey Shaders - Ultra Clean
         AFRAME.registerShader('chromakey-advanced', {
@@ -767,7 +768,7 @@
         let markerIgnoreUntil = 0; // Timestamp untuk ignore marker lain
         const MARKER_IGNORE_DURATION = 1000; // 1 detik ignore (dikurangi dari 2 detik)
 
-        // Force load audio
+        // Force load audio (for separate audio files)
         soundV1.load();
         soundV1.preload = 'auto';
         soundV2.load();
@@ -782,90 +783,6 @@
         soundV6.preload = 'auto';
         soundV7.load();
         soundV7.preload = 'auto';
-        
-        soundV1.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v1 loaded');
-        });
-        
-        soundV1.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v1 ready to play');
-        });
-        
-        soundV1.addEventListener('error', (e) => {
-            console.error('❌ Sound v1 error:', e);
-        });
-        
-        soundV2.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v2 loaded');
-        });
-        
-        soundV2.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v2 ready to play');
-        });
-        
-        soundV2.addEventListener('error', (e) => {
-            console.error('❌ Sound v2 error:', e);
-        });
-        
-        soundV3.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v3 loaded');
-        });
-        
-        soundV3.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v3 ready to play');
-        });
-        
-        soundV3.addEventListener('error', (e) => {
-            console.error('❌ Sound v3 error:', e);
-        });
-        
-        soundV4.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v4 loaded');
-        });
-        
-        soundV4.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v4 ready to play');
-        });
-        
-        soundV4.addEventListener('error', (e) => {
-            console.error('❌ Sound v4 error:', e);
-        });
-        
-        soundV5.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v5 loaded');
-        });
-        
-        soundV5.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v5 ready to play');
-        });
-        
-        soundV5.addEventListener('error', (e) => {
-            console.error('❌ Sound v5 error:', e);
-        });
-        
-        soundV6.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v6 loaded');
-        });
-        
-        soundV6.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v6 ready to play');
-        });
-        
-        soundV6.addEventListener('error', (e) => {
-            console.error('❌ Sound v6 error:', e);
-        });
-        
-        soundV7.addEventListener('loadeddata', () => {
-            console.log('🎵 Sound v7 loaded');
-        });
-        
-        soundV7.addEventListener('canplaythrough', () => {
-            console.log('🎵 Sound v7 ready to play');
-        });
-        
-        soundV7.addEventListener('error', (e) => {
-            console.error('❌ Sound v7 error:', e);
-        });
 
         // Force aggressive preloading for ALL videos
         allVideos.forEach(v => {
@@ -1072,41 +989,28 @@
             const playPromises = videosPart1.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Step 2: Wait minimal untuk first frame (dikurangi dari 300ms ke 150ms)
+            // Step 2: Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Step 3: Fade in container dan audio BERSAMAAN untuk sync lebih baik
+            // Step 3: Fade in container (audio embedded in video will play automatically)
             fadeInContainer(containerPart1, 400);
             
-            // Step 4: Start audio hampir bersamaan (delay minimal 50ms)
-            await new Promise(r => setTimeout(r, 50));
-            
-            // Step 5: Start audio
-            try {
-                if (!audioEnabled) {
-                    console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-                } else {
-                    soundV1.pause();
-                    soundV1.currentTime = 0;
-                    soundV1.volume = 0;
-                    await soundV1.play();
-                    fadeAudioIn(soundV1, 400); // Dikurangi dari 500ms ke 400ms
-                    console.log('✅ Audio v1 playing (synced)!');
-                }
-            } catch (e) {
-                console.error('❌ Audio v1 error:', e);
-            }
-            
-            console.log('✅ Part 1 playing - 5 videos overlay');
+            console.log('✅ Part 1 playing - 5 videos overlay (audio embedded in BATU SEAWEED video)');
             
             // Wait for all videos to end
             Promise.all(videosPart1.map(v => new Promise(resolve => {
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 1 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart1.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part1Finished = true;
-                fadeAudioOut(soundV1, 400);
                 
                 // HIDE container Part 1 setelah selesai
                 fadeOutContainer(containerPart1, 400);
@@ -1122,6 +1026,44 @@
             });
         }
         
+        
+        // Audio fade-in function
+        function fadeAudioIn(audio, duration) {
+            const steps = 30;
+            const stepDuration = duration / steps;
+            const volumeStep = 1.0 / steps;
+            let currentStep = 0;
+            
+            const fadeInterval = setInterval(() => {
+                currentStep++;
+                audio.volume = Math.min(currentStep * volumeStep, 1.0);
+                
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    audio.volume = 1.0;
+                }
+            }, stepDuration);
+        }
+        
+        // Audio fade-out function
+        function fadeAudioOut(audio, duration) {
+            const steps = 20;
+            const stepDuration = duration / steps;
+            const volumeStep = 1.0 / steps;
+            let currentStep = steps;
+            
+            const fadeInterval = setInterval(() => {
+                currentStep--;
+                audio.volume = Math.max(currentStep * volumeStep, 0);
+                
+                if (currentStep <= 0) {
+                    clearInterval(fadeInterval);
+                    audio.volume = 0;
+                    audio.pause();
+                }
+            }, stepDuration);
+        }
+
         
         // Audio fade-in function
         function fadeAudioIn(audio, duration) {
@@ -1199,32 +1141,13 @@
                 const playPromises = videosPart2.map(v => v.play().catch(e => console.error('Video play error:', e)));
                 await Promise.all(playPromises);
                 
-                // Step 2: Wait minimal untuk first frame (150ms)
+                // Step 2: Wait minimal untuk first frame
                 await new Promise(r => setTimeout(r, 150));
                 
-                // Step 3: Fade in container dan audio BERSAMAAN
+                // Step 3: Fade in container (audio embedded in BATU SEAWEED video)
                 fadeInContainer(containerPart2, 400);
                 
-                // Step 4: Start audio hampir bersamaan (delay minimal 50ms)
-                await new Promise(r => setTimeout(r, 50));
-                
-                // Step 5: Start audio v2
-                try {
-                    if (!audioEnabled) {
-                    console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-                } else {
-                    soundV2.pause();
-                    soundV2.currentTime = 0;
-                    soundV2.volume = 0;
-                    await soundV2.play();
-                    fadeAudioIn(soundV2, 400);
-                    console.log('✅ Audio v2 playing (synced)!');
-                }
-                } catch (e) {
-                    console.error('❌ Audio v2 error:', e);
-                }
-                
-                console.log('✅ Part 2 playing - 5 videos overlay');
+                console.log('✅ Part 2 playing - 5 videos overlay (audio embedded in BATU SEAWEED video)');
                 
                 isTransitioning = false;
                 
@@ -1233,9 +1156,15 @@
                     v.onended = resolve;
                 }))).then(() => {
                     console.log('✅ Part 2 finished!');
+                    
+                    // Reset videos IMMEDIATELY to prevent black screen
+                    videosPart2.forEach(v => {
+                        v.pause();
+                        v.currentTime = 0;
+                    });
+                    
                     isPlaying = false;
                     part2Finished = true;
-                    fadeAudioOut(soundV2, 400);
                     
                     // HIDE container Part 2 setelah selesai
                     fadeOutContainer(containerPart2, 400);
@@ -1268,11 +1197,6 @@
             console.log('🎬 Starting Part 3 - 3 videos overlay');
             isTransitioning = true;
             
-            // Fade out audio v2 (jika ada)
-            if (currentPart === 2) {
-                fadeAudioOut(soundV2, 300);
-            }
-            
             // Fade out Part 2 (jika ada)
             if (containerPart2.getAttribute('visible') === 'true') {
                 fadeOutContainer(containerPart2, 400, async () => {
@@ -1302,32 +1226,13 @@
             const playPromises = videosPart3.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Step 2: Wait minimal untuk first frame (150ms)
+            // Step 2: Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Step 3: Fade in container dan audio BERSAMAAN
+            // Step 3: Fade in container (audio embedded in KAPAL SELAM video)
             fadeInContainer(containerPart3, 400);
             
-            // Step 4: Start audio hampir bersamaan (delay minimal 50ms)
-            await new Promise(r => setTimeout(r, 50));
-            
-            // Step 5: Start audio v3
-            try {
-                if (!audioEnabled) {
-                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-            } else {
-                soundV3.pause();
-                soundV3.currentTime = 0;
-                soundV3.volume = 0;
-                await soundV3.play();
-                fadeAudioIn(soundV3, 400);
-                console.log('✅ Audio v3 playing (synced)!');
-            }
-            } catch (e) {
-                console.error('❌ Audio v3 error:', e);
-            }
-            
-            console.log('✅ Part 3 playing - 3 videos overlay');
+            console.log('✅ Part 3 playing - 3 videos overlay (audio embedded in KAPAL SELAM video)');
             
             isTransitioning = false;
             
@@ -1339,9 +1244,6 @@
                 videosPart3.forEach(v => {
                     v.pause();
                 });
-                
-                // Pause audio v3 (tidak reset currentTime)
-                soundV3.pause();
                 
                 // Update status - PAUSED, bukan FINISHED!
                 isPlaying = false;
@@ -1378,14 +1280,6 @@
             const playPromises = videosPart3.map(v => v.play().catch(e => console.error('Video play error:', e)));
             await Promise.all(playPromises);
             
-            // Resume audio v3 (lanjut dari currentTime)
-            try {
-                await soundV3.play();
-                console.log('✅ Audio v3 resumed!');
-            } catch (e) {
-                console.error('❌ Audio v3 resume error:', e);
-            }
-            
             console.log('✅ Part 3 resumed');
             
             // Wait for all videos to end
@@ -1393,9 +1287,15 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 3 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart3.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part3Finished = true;
-                fadeAudioOut(soundV3, 400);
                 
                 // HIDE container Part 3 setelah selesai (prevent overlap dengan Part 4)
                 fadeOutContainer(containerPart3, 400);
@@ -2116,22 +2016,6 @@
                 v.currentTime = 0;
             });
             
-            // Reset audio
-            soundV1.pause();
-            soundV1.currentTime = 0;
-            soundV2.pause();
-            soundV2.currentTime = 0;
-            soundV3.pause();
-            soundV3.currentTime = 0;
-            soundV4.pause();
-            soundV4.currentTime = 0;
-            soundV5.pause();
-            soundV5.currentTime = 0;
-            soundV6.pause();
-            soundV6.currentTime = 0;
-            soundV7.pause();
-            soundV7.currentTime = 0;
-            
             // Reset state
             currentPart = 0;
             part1Finished = false;
@@ -2227,28 +2111,10 @@
             // Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Fade in container
+            // Fade in container (audio embedded in KAPAL SELAM video)
             fadeInContainer(containerPart4, 400);
             
-            // Start audio v4 (delay 50ms)
-            await new Promise(r => setTimeout(r, 50));
-            
-            try {
-                if (!audioEnabled) {
-                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-            } else {
-                soundV4.pause();
-                soundV4.currentTime = 0;
-                soundV4.volume = 0;
-                await soundV4.play();
-                fadeAudioIn(soundV4, 400);
-                console.log('✅ Audio v4 playing (synced)!');
-            }
-            } catch (e) {
-                console.error('❌ Audio v4 error:', e);
-            }
-            
-            console.log('✅ Part 4 playing - 3 videos + 1 image overlay with audio');
+            console.log('✅ Part 4 playing - 3 videos + 1 image overlay (audio embedded in KAPAL SELAM video)');
             
             isTransitioning = false;
             
@@ -2257,9 +2123,15 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 4 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart4.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part4Finished = true;
-                fadeAudioOut(soundV4, 400);
                 
                 // HIDE container Part 4 setelah selesai
                 fadeOutContainer(containerPart4, 400);
@@ -2323,28 +2195,10 @@
             // Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Fade in container
+            // Fade in container (audio embedded in KAPAL SELAM video)
             fadeInContainer(containerPart5, 400);
             
-            // Start audio v5 (delay 50ms)
-            await new Promise(r => setTimeout(r, 50));
-            
-            try {
-                if (!audioEnabled) {
-                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-            } else {
-                soundV5.pause();
-                soundV5.currentTime = 0;
-                soundV5.volume = 0;
-                await soundV5.play();
-                fadeAudioIn(soundV5, 400);
-                console.log('✅ Audio v5 playing (synced)!');
-            }
-            } catch (e) {
-                console.error('❌ Audio v5 error:', e);
-            }
-            
-            console.log('✅ Part 5 playing - 3 videos overlay with audio v5');
+            console.log('✅ Part 5 playing - 3 videos overlay (audio embedded in KAPAL SELAM video)');
             
             isTransitioning = false;
             
@@ -2353,9 +2207,15 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 5 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart5.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part5Finished = true;
-                fadeAudioOut(soundV5, 400);
                 
                 // HIDE container Part 5 setelah selesai
                 fadeOutContainer(containerPart5, 400);
@@ -2419,28 +2279,10 @@
             // Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Fade in container
+            // Fade in container (audio embedded in GOSOK GIGI video)
             fadeInContainer(containerPart6, 400);
             
-            // Start audio v6 - delay 50ms
-            await new Promise(r => setTimeout(r, 50));
-            
-            try {
-                if (!audioEnabled) {
-                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-            } else {
-                soundV6.pause();
-                soundV6.currentTime = 0;
-                soundV6.volume = 0;
-                await soundV6.play();
-                fadeAudioIn(soundV6, 400);
-                console.log('✅ Audio v6 playing (synced)!');
-            }
-            } catch (e) {
-                console.error('❌ Audio v6 error:', e);
-            }
-            
-            console.log('✅ Part 6 playing - 4 videos overlay with audio v6');
+            console.log('✅ Part 6 playing - 4 videos overlay (audio embedded in GOSOK GIGI video)');
             
             isTransitioning = false;
             
@@ -2449,9 +2291,15 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 6 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart6.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part6Finished = true;
-                fadeAudioOut(soundV6, 400);
                 
                 // HIDE container Part 6 setelah selesai
                 fadeOutContainer(containerPart6, 400);
@@ -2515,28 +2363,10 @@
             // Wait minimal untuk first frame
             await new Promise(r => setTimeout(r, 150));
             
-            // Fade in container
+            // Fade in container (audio embedded in CORAL video)
             fadeInContainer(containerPart7, 400);
             
-            // Start audio v7 - delay 50ms
-            await new Promise(r => setTimeout(r, 50));
-            
-            try {
-                if (!audioEnabled) {
-                console.warn('⚠️ Audio not enabled yet, skipping audio playback');
-            } else {
-                soundV7.pause();
-                soundV7.currentTime = 0;
-                soundV7.volume = 0;
-                await soundV7.play();
-                fadeAudioIn(soundV7, 400);
-                console.log('✅ Audio v7 playing (synced)!');
-            }
-            } catch (e) {
-                console.error('❌ Audio v7 error:', e);
-            }
-            
-            console.log('✅ Part 7 playing - 4 videos overlay with audio v7');
+            console.log('✅ Part 7 playing - 4 videos overlay (audio embedded in CORAL video)');
             
             isTransitioning = false;
             
@@ -2545,9 +2375,15 @@
                 v.onended = resolve;
             }))).then(() => {
                 console.log('✅ Part 7 finished!');
+                
+                // Reset videos IMMEDIATELY to prevent black screen
+                videosPart7.forEach(v => {
+                    v.pause();
+                    v.currentTime = 0;
+                });
+                
                 isPlaying = false;
                 part7Finished = true;
-                fadeAudioOut(soundV7, 400);
                 
                 // HIDE container Part 7 setelah selesai
                 fadeOutContainer(containerPart7, 400);
@@ -2573,16 +2409,17 @@
         target7.setAttribute('smooth-tracking', 'smoothing: 0.7');
 
         console.log('🚀 AR Experience initialized - 7 MARKERS MODE (SEQUENTIAL)');
-        console.log('Marker 1 (Target 0): Part 1 - 5 videos overlay + audio v1');
-        console.log('Marker 2 (Target 1): Part 2 - 5 videos overlay + audio v2');
-        console.log('Marker 3 (Target 2): Part 3 - 3 videos overlay + audio v3 (pause at 3s)');
-        console.log('Marker 4 (Target 3): Part 4 - 3 videos + 1 image + audio v4');
-        console.log('Marker 5 (Target 4): Part 5 - 3 videos overlay + audio v5');
-        console.log('Marker 6 (Target 5): Part 6 - 4 videos overlay + audio v6');
-        console.log('Marker 7 (Target 6): Part 7 - 4 videos overlay + audio v7');
+        console.log('Marker 1 (Target 0): Part 1 - 5 videos overlay (BATU SEAWEED has embedded audio)');
+        console.log('Marker 2 (Target 1): Part 2 - 5 videos overlay (BATU SEAWEED has embedded audio)');
+        console.log('Marker 3 (Target 2): Part 3 - 3 videos overlay (KAPAL SELAM has embedded audio, pause at 3s)');
+        console.log('Marker 4 (Target 3): Part 4 - 3 videos + 1 image (KAPAL SELAM has embedded audio)');
+        console.log('Marker 5 (Target 4): Part 5 - 3 videos overlay (KAPAL SELAM has embedded audio)');
+        console.log('Marker 6 (Target 5): Part 6 - 4 videos overlay (GOSOK GIGI has embedded audio)');
+        console.log('Marker 7 (Target 6): Part 7 - 4 videos overlay (CORAL has embedded audio)');
         console.log('📋 SEQUENTIAL MODE: Harus urut Part 1 → 2 → 3 → 4 → 5 → 6 → 7');
         console.log('🔄 Bisa ulang part yang sama jika kurang jelas (tap untuk replay)');
         console.log('⛔ Tidak bisa balik ke part sebelumnya');
+        console.log('🎵 Audio embedded in video - no separate audio files needed!');
     </script>
 </body>
 </html>
