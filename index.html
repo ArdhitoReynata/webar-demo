@@ -278,9 +278,8 @@
         
         <!-- Target 5 - Part 5 -->
         <a-entity id="target5" mindar-image-target="targetIndex: 4">
-            <!-- Part 5 Container - 3 videos overlay bersamaan -->
+            <!-- Part 5 Container - 2 videos overlay bersamaan -->
             <a-entity id="video-container-part5" visible="false">
-                <a-video id="video-kapal5" src="#vid-kapal5" position="0 0 0.10" height="1" width="1" material="shader: chromakey-advanced; src: #vid-kapal5; transparent: true; side: double"></a-video>
                 <a-video id="video-orang5" src="#vid-orang5" position="0 0 0.2" height="1" width="1" material="shader: chromakey-advanced; src: #vid-orang5; transparent: true; side: double"></a-video>
                 <a-video id="video-tangan" src="#vid-tangan" position="0 0 0.25" height="1" width="1" material="shader: chromakey-advanced; src: #vid-tangan; transparent: true; side: double"></a-video>
             </a-entity>
@@ -334,7 +333,6 @@
             <video id="vid-sikat4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 5 Videos - All 60fps, 23.08s, 1280x1280 -->
-            <video id="vid-kapal5" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-orang5" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             <video id="vid-tangan" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
@@ -351,7 +349,7 @@
             <video id="vid-orang7" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline muted></video>
             
             <!-- Part 4 Image -->
-            <img id="img-lumut4" src="./compressed/LUMUT-v4.PNG" crossorigin="anonymous" />
+            <img id="img-lumut4" src="./compressed_ultra/LUMUT-v4.PNG" crossorigin="anonymous" />
             
             <!-- Audio files -->
             <audio id="sound-v1" src="./sound-v1.MP3" preload="auto"></audio>
@@ -369,39 +367,38 @@
         const cacheBuster = Date.now();
         
         // Set video sources with cache buster
-        document.getElementById('vid-laut').src = `./compressed/LAUT-v1.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-batu').src = `./compressed/BATU SEAWEED-v1.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-gelembung').src = `./compressed/GELEMBUNG-v1.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-kapal').src = `./compressed/KAPAL SELAM-v1.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot').src = `./compressed/MASCOT-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-laut').src = `./compressed_ultra/LAUT-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-batu').src = `./compressed_ultra/BATU SEAWEED-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-gelembung').src = `./compressed_ultra/GELEMBUNG-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal').src = `./compressed_ultra/KAPAL SELAM-v1.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot').src = `./compressed_ultra/MASCOT-v1.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-batu2').src = `./compressed/BATU SEAWEED-v2.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-gelembung2').src = `./compressed/GELEMBUNG-v2.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot2').src = `./compressed/MASCOT-v2.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-gosok').src = `./compressed/GOSOK GIGI-v2.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-orang').src = `./compressed/ORANG-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-batu2').src = `./compressed_ultra/BATU SEAWEED-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-gelembung2').src = `./compressed_ultra/GELEMBUNG-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot2').src = `./compressed_ultra/MASCOT-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-gosok').src = `./compressed_ultra/GOSOK GIGI-v2.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-orang').src = `./compressed_ultra/ORANG-v2.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal3').src = `./compressed/KAPAL SELAM-v3.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot3').src = `./compressed/MASCOT-v3.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-sikat').src = `./compressed/SIKAT GIGI-v3.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal3').src = `./compressed_ultra/KAPAL SELAM-v3.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot3').src = `./compressed_ultra/MASCOT-v3.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-sikat').src = `./compressed_ultra/SIKAT GIGI-v3.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal4').src = `./compressed/KAPAL SELAM-v4.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot4').src = `./compressed/MASCOT-v4.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-sikat4').src = `./compressed/SIKAT GIGI-v4.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal4').src = `./compressed_ultra/KAPAL SELAM-v4.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot4').src = `./compressed_ultra/MASCOT-v4.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-sikat4').src = `./compressed_ultra/SIKAT GIGI-v4.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal5').src = `./compressed/KAPAL SELAM-v5.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-orang5').src = `./compressed/ORANG-v5.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-tangan').src = `./compressed/TANGAN-v5.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-orang5').src = `./compressed_ultra/ORANG-v5.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-tangan').src = `./compressed_ultra/TANGAN-v5.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-kapal6').src = `./compressed/KAPAL SELAM-v6.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot6').src = `./compressed/MASCOT-v6.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-orang6').src = `./compressed/ORANG-v6.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-gosok6').src = `./compressed/GOSOK GIGI-v6.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-kapal6').src = `./compressed_ultra/KAPAL SELAM-v6.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot6').src = `./compressed_ultra/MASCOT-v6.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-orang6').src = `./compressed_ultra/ORANG-v6.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-gosok6').src = `./compressed_ultra/GOSOK GIGI-v6.mp4?t=${cacheBuster}`;
         
-        document.getElementById('vid-coral7').src = `./compressed/CORAL-v7.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-laut7').src = `./compressed/LAUT-v7.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-mascot7').src = `./compressed/MASCOT-v7.mp4?t=${cacheBuster}`;
-        document.getElementById('vid-orang7').src = `./compressed/ORANG-v7.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-coral7').src = `./compressed_ultra/CORAL-v7.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-laut7').src = `./compressed_ultra/LAUT-v7.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-mascot7').src = `./compressed_ultra/MASCOT-v7.mp4?t=${cacheBuster}`;
+        document.getElementById('vid-orang7').src = `./compressed_ultra/ORANG-v7.mp4?t=${cacheBuster}`;
         
         console.log('🔄 Cache buster applied:', cacheBuster);
         
@@ -687,7 +684,6 @@
         ];
         
         const videosPart5 = [
-            document.getElementById('vid-kapal5'),
             document.getElementById('vid-orang5'),
             document.getElementById('vid-tangan')
         ];
@@ -794,8 +790,8 @@
             video.addEventListener('loadeddata', () => {
                 videosLoaded++;
                 
-                // Update progress dots (27 videos total)
-                const totalVideos = 27;
+                // Update progress dots (26 videos total)
+                const totalVideos = 26;
                 const dots = '●'.repeat(videosLoaded) + '○'.repeat(totalVideos - videosLoaded);
                 loadingProgress.textContent = dots;
                 
@@ -804,11 +800,11 @@
 
             video.addEventListener('canplaythrough', () => {
                 videosBuffered++;
-                loadingDetail.textContent = videosBuffered === 27 ? 'Siap!' : 'Harap bersabar sebentar';
-                console.log(`📹 Video ${index + 1} buffered (${videosBuffered}/27)`);
+                loadingDetail.textContent = videosBuffered === 26 ? 'Siap!' : 'Harap bersabar sebentar';
+                console.log(`📹 Video ${index + 1} buffered (${videosBuffered}/26)`);
                 
-                // Only enable button when ALL 27 videos are fully buffered
-                if (videosBuffered >= 27 && !allFullyBuffered) {
+                // Only enable button when ALL 26 videos are fully buffered
+                if (videosBuffered >= 26 && !allFullyBuffered) {
                     allFullyBuffered = true;
                     allReady = true;
                     loadingMessage.textContent = 'Selesai!';
@@ -2256,7 +2252,7 @@
             });
         }
         
-        // Play Part 5 - 3 videos overlay bersamaan (no audio)
+        // Play Part 5 - 2 videos overlay bersamaan (no audio)
         async function playPart5() {
             if (isPlaying || isTransitioning) {
                 console.log('⏹️ Cannot play Part 5 yet');
@@ -2271,7 +2267,7 @@
             // FORCE HIDE all other containers
             hideAllContainersExcept(null);
             
-            console.log('🎬 Starting Part 5 - 3 videos overlay');
+            console.log('🎬 Starting Part 5 - 2 videos overlay');
             isTransitioning = true;
             
             // Fade out previous part if any
@@ -2328,7 +2324,7 @@
                 console.error('❌ Audio v5 error:', e);
             }
             
-            console.log('✅ Part 5 playing - 3 videos overlay with separate audio');
+            console.log('✅ Part 5 playing - 2 videos overlay with separate audio');
             
             isTransitioning = false;
             
@@ -2585,7 +2581,7 @@
         console.log('Marker 2 (Target 1): Part 2 - 5 videos overlay + audio v2');
         console.log('Marker 3 (Target 2): Part 3 - 3 videos overlay + audio v3 (pause at 3s)');
         console.log('Marker 4 (Target 3): Part 4 - 3 videos + 1 image + audio v4');
-        console.log('Marker 5 (Target 4): Part 5 - 3 videos overlay + audio v5');
+        console.log('Marker 5 (Target 4): Part 5 - 2 videos overlay + audio v5');
         console.log('Marker 6 (Target 5): Part 6 - 4 videos overlay + audio v6');
         console.log('Marker 7 (Target 6): Part 7 - 4 videos overlay + audio v7');
         console.log('📋 SEQUENTIAL MODE: Harus urut Part 1 → 2 → 3 → 4 → 5 → 6 → 7');
