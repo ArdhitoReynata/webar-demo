@@ -970,6 +970,9 @@
             lockedMarker = 1;
             console.log('🔒 Marker LOCKED - Only Marker 1 active');
             
+            // FORCE HIDE all other containers to prevent black screen
+            hideAllContainersExcept(null);
+            
             console.log('🎬 Starting Part 1 - 5 videos overlay');
             currentPart = 1;
             isPlaying = true;
@@ -1120,6 +1123,16 @@
             }, stepDuration);
         }
 
+        // Helper function to hide all containers except the specified one
+        function hideAllContainersExcept(exceptContainer) {
+            const allContainers = [containerPart1, containerPart2, containerPart3, containerPart4, containerPart5, containerPart6, containerPart7];
+            allContainers.forEach(container => {
+                if (container !== exceptContainer) {
+                    container.setAttribute('visible', false);
+                }
+            });
+        }
+
         // Play Part 2 - 5 videos overlay bersamaan dengan audio v2 (after Part 1 finished)
         async function playPart2() {
             // SEQUENTIAL MODE: Harus selesai Part 1 dulu atau replay Part 2
@@ -1136,13 +1149,19 @@
             console.log('🎬 Starting Part 2 - 5 videos overlay');
             isTransitioning = true;
             
+            // FORCE HIDE all other containers to prevent black screen
+            hideAllContainersExcept(null);
+            console.log('🔄 Force hiding all containers before Part 2');
+            
             // Fade out audio v1
             fadeAudioOut(soundV1, 300);
             
-            // Fade out Part 1
-            fadeOutContainer(containerPart1, 400, async () => {
-                currentPart = 2;
-                isPlaying = true;
+            // Small delay to ensure containers are hidden
+            await new Promise(r => setTimeout(r, 100));
+            
+            // Start Part 2
+            currentPart = 2;
+            isPlaying = true;
                 
                 statusBar.textContent = '✅ Part 2 Playing! 🔊';
                 statusBar.classList.add('tracking');
@@ -1215,7 +1234,6 @@
                     statusBar.classList.remove('tracking');
                     statusBar.classList.add('finished');
                 });
-            });
         }
         
         // Play Part 3 - 3 videos overlay bersamaan dengan audio v3 (after Part 2 finished)
@@ -1230,6 +1248,9 @@
             isMarkerLocked = true;
             lockedMarker = 3;
             console.log('🔒 Marker LOCKED - Only Marker 3 active');
+            
+            // FORCE HIDE all other containers
+            hideAllContainersExcept(null);
             
             console.log('🎬 Starting Part 3 - 3 videos overlay');
             isTransitioning = true;
@@ -2134,6 +2155,9 @@
             lockedMarker = 4;
             console.log('🔒 Marker LOCKED - Only Marker 4 active');
             
+            // FORCE HIDE all other containers (especially Part 3)
+            hideAllContainersExcept(null);
+            
             console.log('🎬 Starting Part 4 - 3 videos + 1 image overlay');
             isTransitioning = true;
             
@@ -2244,6 +2268,9 @@
             lockedMarker = 5;
             console.log('🔒 Marker LOCKED - Only Marker 5 active');
             
+            // FORCE HIDE all other containers
+            hideAllContainersExcept(null);
+            
             console.log('🎬 Starting Part 5 - 3 videos overlay');
             isTransitioning = true;
             
@@ -2346,6 +2373,9 @@
             lockedMarker = 6;
             console.log('🔒 Marker LOCKED - Only Marker 6 active');
             
+            // FORCE HIDE all other containers
+            hideAllContainersExcept(null);
+            
             console.log('🎬 Starting Part 6 - 4 videos overlay');
             isTransitioning = true;
             
@@ -2447,6 +2477,9 @@
             isMarkerLocked = true;
             lockedMarker = 7;
             console.log('🔒 Marker LOCKED - Only Marker 7 active');
+            
+            // FORCE HIDE all other containers
+            hideAllContainersExcept(null);
             
             console.log('🎬 Starting Part 7 - 4 videos overlay');
             isTransitioning = true;
